@@ -16,17 +16,31 @@ class BlogsController extends Controller
         ];
         $BlogData = Blogs::all();
         $title = 'Veda-Blog';
-        return view('blog/index', compact('BlogData','title', 'sidebar'));
+        return view('blog/index', compact('BlogData', 'title', 'sidebar'));
     }
     public function blogShow()
     {
         $sidebar = [
             ['Dashboard' => 'dashboard'],
         ];
-        $BlogData = Blogs::all()->where('user_id',Auth::id());
+        $BlogData = Blogs::all()->where('user_id', Auth::id());
         $title = 'Veda-Blog';
-        return view('blog/blog', compact('BlogData','title', 'sidebar'));
+        return view('blog/blog', compact('BlogData', 'title', 'sidebar'));
     }
+
+    // public function blogCreate(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required|exists:users,id',
+    //         'name' => 'required|string|max:255',
+    //         'detail' => 'required|string',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     ]);
+
+    //     $blog = Blogs::create($request->all());
+
+    //     return redirect('/blog')->with('success', "Blog successfully created.");
+    // }
 
     public function blogCreate(Request $request)
     {
@@ -34,13 +48,26 @@ class BlogsController extends Controller
             'user_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
             'detail' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Create a new blog entry
-        $blog = Blogs::create($request->all());
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/images', $imageName);
+        } else {
+            $imageName = null;
+        }
+
+        $blog = Blogs::create([
+            'user_id' => $request->user_id,
+            'name' => $request->name,
+            'detail' => $request->detail,
+            'image' => $imageName,
+        ]);
 
         return redirect('/blog')->with('success', "Blog successfully created.");
-
     }
     public function deleteBlog($id)
     {
@@ -49,7 +76,7 @@ class BlogsController extends Controller
     }
     public function updateBlog($updateData)
     {
-        Blogs::where('id', 1)->update(['name' => $updateData['name'], ['detail']=>$updateData['detail']]);
+        Blogs::where('id', 1)->update(['name' => $updateData['name'], ['detail'] => $updateData['detail']]);
         return back();
     }
 }
