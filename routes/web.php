@@ -8,7 +8,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
@@ -18,12 +17,14 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     Route::get('/blog', [BlogsController::class, 'index'])->name('blog');
     Route::get('/blog/user', [BlogsController::class, 'blogShow'])->name('blog.show');
 
-    Route::post('/blog/create', [BlogsController::class, 'blogCreate'])->name('blog.post'); 
+    Route::post('/blog/create', [BlogsController::class, 'blogCreate'])->name('blog.post');
     Route::get('/update/{id}', [BlogsController::class, 'deleteBlog'])->name('updateBlog');
 
     Route::get('/blog/{id}', [BlogsController::class, 'deleteBlog'])->name('deleteBlog');
