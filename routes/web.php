@@ -25,7 +25,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/blog/user', [BlogsController::class, 'blogShow'])->name('blog.show');
 
     Route::post('/blog/create', [BlogsController::class, 'blogCreate'])->name('blog.post');
-    Route::get('/update/{id}', [BlogsController::class, 'deleteBlog'])->name('updateBlog');
+
+    Route::get('/update/{id}', [BlogsController::class, 'updateShow'])->name('updateshow');
+    Route::post('/update/{id}', [BlogsController::class, 'updateBlog'])->name('updateBlog');
 
     Route::get('/blog/{id}', [BlogsController::class, 'deleteBlog'])->name('deleteBlog');
     Route::get('/delete/{id}', [HomeController::class, 'deleteUser'])->name('delete');

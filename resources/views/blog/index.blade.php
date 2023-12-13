@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="content">
-        <h1>All Blog </h1>
+        <h1>All Blog and Create</h1>
         <div class="container mt-5">
             <table class="table table-bordered mb-5">
                 <thead>
