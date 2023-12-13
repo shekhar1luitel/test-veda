@@ -30,8 +30,17 @@ class BlogsController extends Controller
 
     public function blogCreate(Request $request)
     {
-        $Blog = Blogs::create($request->validated());
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
+            'detail' => 'required|string',
+        ]);
+
+        // Create a new blog entry
+        $blog = Blogs::create($request->all());
+
         return redirect('/blog')->with('success', "Blog successfully created.");
+
     }
     public function deleteBlog($id)
     {
