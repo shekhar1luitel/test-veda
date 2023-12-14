@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="content">
-        <h1>All Blog and Create</h1>
+        <h1 style="padding:15px">All Blog and Create</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -36,8 +36,10 @@
         @endif
         <form action="{{ route('blog.search') }}" method="GET">
             @csrf
-            <input type="text" name="search" placeholder="Search">
-            <button type="submit">Search</button>
+            <div style="padding-bottom: 10px">
+                <input type="text" name="search" placeholder="Search">
+            </div>
+            <button class="btn btn-green" type="submit">Search</button>
         </form>
         <div class="container mt-5">
             <table class="table table-bordered mb-5">
@@ -65,6 +67,8 @@
                                     href="{{ route('deleteBlog', [$data->id]) }}">Delete</a></td>
                             <td class="btn btn-danger" style="color: black"><a
                                     href="{{ route('updateBlog', [$data->id]) }}">Update</a></td>
+                            <td class="btn btn-danger" style="color: black"><a
+                                    href="{{ route('blog.show.one', [$data->id]) }}">View</a></td>
                         </tr>
                     @endforeach
                 </tbody>

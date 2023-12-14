@@ -110,6 +110,17 @@ class BlogsController extends Controller
             'name' => 'required|string|max:255',
             'detail' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'user_id.required' => 'The user ID is required.',
+            'user_id.exists' => 'The selected user does not exist.',
+            'name.required' => 'The blog name is required.',
+            'name.string' => 'The blog name must be a string.',
+            'name.max' => 'The blog name may not be greater than :max characters.',
+            'detail.required' => 'The blog detail is required.',
+            'detail.string' => 'The blog detail must be a string.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The image must be of type: jpeg, png, jpg, gif.',
+            'image.max' => 'The image may not be greater than :max kilobytes.',
         ]);
 
         $blog = Blogs::find($id);
@@ -143,13 +154,13 @@ class BlogsController extends Controller
 
         return redirect('/blog')->with('success', "Blog successfully updated.");
     }
+
     public function search(Request $request)
     {
         $sidebar = [
             ['Dashboard' => 'dashboard'],
             ['Blog' => 'blog'],
             ['Blog Show' => 'blog.show'],
-
         ];
         $title = 'Veda';
 

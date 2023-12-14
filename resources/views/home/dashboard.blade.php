@@ -14,12 +14,28 @@
         </div>
     </div>
     <div class="content">
-        <h1>All Users with Pagination</h1>
+        <h1 style="padding:15px">All Users with Pagination</h1>
         <form action="{{ route('user.search') }}" method="GET">
             @csrf
-            <input type="text" name="search" placeholder="Search">
-            <button type="submit">Search</button>
+            <div style="padding-bottom: 10px">
+                <input type="text" name="search" placeholder="Search">
+            </div>
+            <button class="btn btn-green" type="submit">Search</button>
         </form>
+        @if ($errors->any())
+                <div class="error-message alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
         <div class="container mt-5">
             <table class="table table-bordered mb-5">
                 <thead>

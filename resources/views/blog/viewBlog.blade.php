@@ -36,7 +36,7 @@
                 <p>{{ $data->detail }}</p>
                 <div>
                     <img style="width:50%"
-                        src="{{ isset($data->image) ? url('storage/images/' . $data->image) : 'https://veda-app.s3.ap-south-1.amazonaws.com/assets/2/about/2023-04-17/pjpXLl9Lek1EOY77-1681731117.png' }}"
+                        src="{{ isset($data->image) ? url('storage/images/' . $data->image) : 'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg' }}"
                         alt="img">
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <div style="padding: 10px" class="card">
                         <div class="box">
                             <img style="height:200px; width:100%;"
-                                src="{{ isset($data->image) ? url('storage/images/' . $data->image) : 'https://veda-app.s3.ap-south-1.amazonaws.com/assets/2/about/2023-04-17/pjpXLl9Lek1EOY77-1681731117.png' }}"
+                                src="{{ isset($data->image) ? url('storage/images/' . $data->image) : 'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg' }}"
                                 alt="image">
                             <h1 style="font-size: 1.4rem;">{{ $data->name }}</h1>
                             <h2 style="font-size: 1.1rem;

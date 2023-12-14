@@ -42,7 +42,7 @@
                 <input name="name" type="name" required>
                 <label for="name">Description</label>
                 <input name="detail" type="description" required>
-                <input type="file" name="image" required>
+                <input type="file" name="image">
                 <button class="btn btn-green" type="submit">Submit</button>
             </form>
         </div>
