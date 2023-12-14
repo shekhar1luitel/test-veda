@@ -1,3 +1,5 @@
+<!-- resources/views/search_results.blade.php -->
+
 @extends('layouts.app-master')
 
 @section('content')
@@ -18,9 +20,10 @@
                 @forelse ($searchdata as $data)
                     <div class="card">
                         <div class="box">
-                            <h1>{{ $data->username }}</h1>
-                            <h3>{{ $data->email }}</h3>
-                            <a  href="{{ route('delete', [$data->id]) }}">Delete</a>
+                            <h1>{{ $data->name }}</h1>
+                            <h3>{{ Str::words($data->detail, 4, '...') }}</h3>
+                            <a href="{{ route('blog.show.one', [$data->id]) }}">View</a>
+
                         </div>
                     </div>
                 @empty

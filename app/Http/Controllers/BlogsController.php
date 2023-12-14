@@ -121,4 +121,22 @@ class BlogsController extends Controller
 
         return redirect('/blog')->with('success', "Blog successfully updated.");
     }
+    public function search(Request $request)
+    {
+        $sidebar = [
+            ['Dashboard' => 'dashboard'],
+            ['Blog' => 'blog'],
+            ['Blog Show' => 'blog.show'],
+
+        ];
+        $title = 'Veda';
+
+        $search = $request->input('search');
+        $searchdata = Blogs::where('id', 'like', '%' . $search . '%')
+                        ->orWhere('name', 'like', '%' . $search . '%')
+                        ->orWhere('detail', 'like', '%' . $search . '%')
+                        ->get();
+
+        return view('blog/search_results', compact('search', 'searchdata', 'title', 'sidebar'));
+    }
 }
