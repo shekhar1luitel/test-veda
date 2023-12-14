@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/searchuser', [HomeController::class, 'search'])->name('user.search');
 
     Route::get('/blog', [BlogsController::class, 'index'])->name('blog');
     Route::get('/blog/user', [BlogsController::class, 'blogShow'])->name('blog.show');

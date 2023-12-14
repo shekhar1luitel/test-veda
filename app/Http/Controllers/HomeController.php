@@ -28,4 +28,22 @@ class HomeController extends Controller
         User::find($id)->delete();
         return back();
     }
+    public function search(Request $request)
+    {
+        $sidebar = [
+            ['Dashboard' => 'dashboard'],
+            ['Blog' => 'blog'],
+            ['Blog Show' => 'blog.show'],
+
+        ];
+        $title = 'Veda';
+
+        $search = $request->input('search');
+        $searchdata = User::where('username', 'like', '%' . $search . '%')
+            ->orWhere('id', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
+            ->get();
+
+        return view('home/search_results', compact('searchdata','search', 'searchdata', 'title', 'sidebar'));
+    }
 }

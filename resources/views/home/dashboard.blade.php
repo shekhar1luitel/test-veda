@@ -15,6 +15,11 @@
     </div>
     <div class="content">
         <h1>All Users with Pagination</h1>
+        <form action="{{ route('user.search') }}" method="GET">
+            @csrf
+            <input type="text" name="search" placeholder="Search">
+            <button type="submit">Search</button>
+        </form>
         <div class="container mt-5">
             <table class="table table-bordered mb-5">
                 <thead>
