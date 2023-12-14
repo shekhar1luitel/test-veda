@@ -197,7 +197,6 @@
 
         .container .content .cards .card {
             width: 250px;
-            height: 150px;
             background: white;
             margin: 20px 10px;
             display: flex;
@@ -386,7 +385,7 @@
 
     @include('layouts.partials.navbar')
 
-    <main class="container">
+    <main style="padding-left: 5px" class="container">
         @yield('content')
     </main>
 </body>

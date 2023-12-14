@@ -5,8 +5,10 @@
         <div class="header">
             <div class="nav">
                 <div class= "nav"> <button class="btn-green">
-                    <a href="{{url('/blog')}}"><li>Blog</li></a>
-                </button> </div>
+                        <a href="{{ url('/blog') }}">
+                            <li>Blog</li>
+                        </a>
+                    </button> </div>
                 <a href="{{ route('logout.perform') }}">
                     <button type="submit" class="btn-red">
                         <li>Logout</li>
@@ -19,15 +21,15 @@
     <div class="content">
         <h1>All Blog and Create</h1>
         @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if (session('success'))
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
@@ -55,7 +57,7 @@
                         <tr>
                             <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ $data->name }}</td>
-                            <td>{{ $data->detail }}</td>
+                            <td>{{ Str::words($data->detail, 20, '...') }}</td>
                             <td>{{ $data->user->username }}</td>
                             <td>{{ $data->created_at }}</td>
                             <td>{{ $data->updated_at }}</td>
