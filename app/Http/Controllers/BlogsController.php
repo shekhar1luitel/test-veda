@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogRequest;
 use App\Models\Blogs;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +30,16 @@ class BlogsController extends Controller
         return view('blog/blog', compact('BlogData', 'title', 'sidebar'));
     }
 
+    public function blogShowOne($id)
+    {
+        $sidebar = [
+            ['Dashboard' => 'dashboard'],
+        ];
+        $data = Blogs::with('user')->find($id);
+        $BlogData = Blogs::all();
+        $title = 'Veda-Blog';
+        return view('blog.viewBlog', compact('data', 'BlogData', 'title', 'sidebar'));
+    }
     public function blogCreate(Request $request)
     {
         $request->validate([
@@ -70,33 +81,6 @@ class BlogsController extends Controller
         return view('blog/update', compact('BlogData', 'title', 'sidebar'));
     }
 
-    // public function updateBlog(Request $request, )
-    // {
-    //     dd($request);
-    //     $request->validate([
-    //         'user_id' => 'required|exists:users,id',
-    //         'name' => 'required|string|max:255',
-    //         'detail' => 'required|string',
-    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //     ]);
-
-    //     if ($request->hasFile('image')) {
-    //         $image = $request->file('image');
-    //         $imageName = time() . '_' . $image->getClientOriginalName();
-    //         $image->storeAs('public/images', $imageName);
-    //     } else {
-    //         $imageName = null;
-    //     }
-
-    //     $blog = Blogs::update([
-    //         'user_id' => $request->user_id,
-    //         'name' => $request->name,
-    //         'detail' => $request->detail,
-    //         'image' => $imageName,
-    //     ])->where('id' );
-
-    //     return redirect('/blog')->with('success', "Blog successfully created.");
-    // }
     public function updateBlog(Request $request, $id)
     {
         $request->validate([

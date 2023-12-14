@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/blog', [BlogsController::class, 'index'])->name('blog');
     Route::get('/blog/user', [BlogsController::class, 'blogShow'])->name('blog.show');
+    Route::get('/blog/post/{id}', [BlogsController::class, 'blogShowOne'])->name('blog.show.one');
+
 
     Route::post('/blog/create', [BlogsController::class, 'blogCreate'])->name('blog.post');
 
