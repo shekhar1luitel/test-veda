@@ -223,15 +223,11 @@
                                 <label>Email</label>
                                 <input type="text" name="username" class="form-control"
                                     placeholder="Email / Username" required />
-                                @if ($errors->has('username'))
-                                    <span class="text-danger text-left">{{ $errors->first('username') }}</span>
-                                @endif
+                                
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control"
                                     placeholder="Enter Password Here" required />
-                                @if ($errors->has('password'))
-                                    <span class="text-danger text-left">{{ $errors->first('password') }}</span>
-                                @endif
+
 
 
                                 <button class="submit-btn" type="submit">Log in</button>

@@ -222,27 +222,19 @@
                             <label>Email</label>
                             <input type="email" name="email" class="form-control" placeholder="Email    "
                                 required />
-                            @if ($errors->has('email'))
-                                <span class="text-danger text-left">{{ $errors->first('email') }}</span>
-                            @endif
+                  
                             <label>User Name</label>
                             <input type="text" name="username" class="form-control" placeholder="User Name    "
                                 required />
-                            @if ($errors->has('username'))
-                                <span class="text-danger text-left">{{ $errors->first('username') }}</span>
-                            @endif
+
                             <label>Password</label>
                             <input type="password" name="password" class="form-control"
                                 placeholder="Enter Password Here" required />
-                            @if ($errors->has('password'))
-                                <span class="text-danger text-left">{{ $errors->first('password') }}</span>
-                            @endif
+
                             <label>Confirm Password</label>
                             <input type="password" name="password_confirmation" class="form-control"
                                 placeholder="Enter Password Here" required />
-                            @if ($errors->has('password_confirmation'))
-                                <span class="text-danger text-left">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
+
                             <button class="submit-btn" type="submit">Log in</button>
                         </form>
                         <a style="color: #474747; font-weight:400" class="link-help" href="{{ url('login') }}">Aready
