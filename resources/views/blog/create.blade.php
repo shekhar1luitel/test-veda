@@ -5,8 +5,8 @@
         <div class="header">
             <div class="nav">
                 <div class= "nav"> <button class="btn-green">
-                        <li>Blog</li>
-                    </button> </div>
+                    <a href="{{url('/blog')}}"><li>Blog</li></a>
+                </button> </div>
                 <a href="{{ route('logout.perform') }}">
                     <button type="submit" class="btn-red">
                         <li>Logout</li>

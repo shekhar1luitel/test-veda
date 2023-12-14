@@ -5,7 +5,7 @@
         <div class="header">
             <div class="nav">
                 <div class= "nav"> <button class="btn-green">
-                        <li>Blog</li>
+                       <a href="{{url('/blog')}}"><li>Blog</li></a>
                     </button> </div>
                 </form>
             </div>
