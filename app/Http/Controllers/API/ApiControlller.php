@@ -13,4 +13,8 @@ class ApiControlller extends Controller
 
         return response()->json(['status' => true, 'blogs' => $blogs], 200);
     }
+    public function getAllBlogsById($data){
+        $blogs = Blogs::find($data);
+        return response()->json(['status' => true, 'blogs' => $blogs], 200);
+    }
 }

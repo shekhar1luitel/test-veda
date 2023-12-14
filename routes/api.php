@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('blog', [ApiControlller::class, 'getAllBlogs']);
+Route::get('blog/{num}', [ApiControlller::class, 'getAllBlogsById']);
+

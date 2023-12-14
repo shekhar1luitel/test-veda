@@ -9,9 +9,8 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        // User::truncate();
-
-        User::create([ //make sure there is id = 1  
+        User::create([ //make sure there is id = 1
+            'id' => 1,
             'email' => 'admin@gmail.com',
             'username' => 'user1',
             'password' => '$2y$12$X39J3sPYwSChQOO4omY9hOIlippIjlmxxejcwzATgelBJ1Hh9Vrim',//Pa$$w0rd!
