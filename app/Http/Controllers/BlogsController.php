@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class BlogsController extends Controller
 {
@@ -19,6 +20,15 @@ class BlogsController extends Controller
         $BlogData = Blogs::all();
         $title = 'Veda-Blog';
         return view('blog/index', compact('BlogData', 'title', 'sidebar'));
+    }
+    public function create()
+    {
+        $sidebar = [
+            ['Dashboard' => 'dashboard'],
+        ];
+        $BlogData = Blogs::all();
+        $title = 'Veda-Blog';
+        return view('blog/create', compact('BlogData', 'title', 'sidebar'));
     }
     public function blogShow()
     {
@@ -43,10 +53,21 @@ class BlogsController extends Controller
     public function blogCreate(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'user_id' => ['required', Rule::exists('users', 'id')],
             'name' => 'required|string|max:255',
             'detail' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'user_id.required' => 'The user ID is required.',
+            'user_id.exists' => 'The selected user does not exist.',
+            'name.required' => 'The blog name is required.',
+            'name.string' => 'The blog name must be a string.',
+            'name.max' => 'The blog name may not be greater than :max characters.',
+            'detail.required' => 'The blog detail is required.',
+            'detail.string' => 'The blog detail must be a string.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The image must be of type: jpeg, png, jpg, gif.',
+            'image.max' => 'The image may not be greater than :max kilobytes.',
         ]);
 
         if ($request->hasFile('image')) {
@@ -64,21 +85,22 @@ class BlogsController extends Controller
             'image' => $imageName,
         ]);
 
-        return redirect('/blog')->with('success', "Blog successfully created.");
+        return redirect('/blog')->with('success', 'Blog successfully created.');
     }
     public function deleteBlog($id)
     {
         Blogs::find($id)->delete();
-        return back();
+        return back()->with('success', 'Blog successfully deleted.');
     }
     public function updateShow($updateData)
     {
         $sidebar = [
             ['Dashboard' => 'dashboard'],
         ];
+
         $BlogData = Blogs::find($updateData);
         $title = 'Veda-Blog';
-        return view('blog/update', compact('BlogData', 'title', 'sidebar'));
+        return view('blog/update', compact('updateData', 'BlogData', 'title', 'sidebar'));
     }
 
     public function updateBlog(Request $request, $id)
@@ -133,9 +155,10 @@ class BlogsController extends Controller
 
         $search = $request->input('search');
         $searchdata = Blogs::where('id', 'like', '%' . $search . '%')
-                        ->orWhere('name', 'like', '%' . $search . '%')
-                        ->orWhere('detail', 'like', '%' . $search . '%')
-                        ->get();
+            ->orWhere('name', 'like', '%' . $search . '%')
+            ->orWhere('detail', 'like', '%' . $search . '%')
+            ->orWhere('user_id', 'like', '%' . $search . '%')
+            ->get();
 
         return view('blog/search_results', compact('search', 'searchdata', 'title', 'sidebar'));
     }

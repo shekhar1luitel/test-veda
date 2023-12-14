@@ -16,14 +16,13 @@
             </form>
         </div>
     </div>
-    {{-- @dd($BlogData) --}}
     <div class="content">
-        <h1>Update Blog</h1>
+        <h1>Create Blog</h1>
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert error-message alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <p>{{ $error }}</p>
                     @endforeach
                 </ul>
             </div>
@@ -34,16 +33,19 @@
             </div>
         @endif
         <div class="container mt-5">
-            <form action="{{ route('updateBlog', [$updateData]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('blog.post') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input name="user_id" value="{{ Auth::id() }}" type="hidden">
                 <label for="name">Title</label>
-                <input name="name" value="{{ $BlogData->name }}" type="name">
+                <input name="name" type="name" required>
                 <label for="name">Description</label>
-                <input name="detail" value="{{ $BlogData->detail }}" type="description">
-                <input type="file" name="image">
+                <input name="detail" type="description" required>
+                <input type="file" name="image" required>
                 <button class="btn btn-green" type="submit">Submit</button>
             </form>
         </div>
     </div>
+
+
+
 @endsection

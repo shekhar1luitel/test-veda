@@ -14,6 +14,7 @@ class HomeController extends Controller
             ['Dashboard' => 'dashboard'],
             ['Blog' => 'blog'],
             ['Blog Show' => 'blog.show'],
+            ['Blog Create' => 'blog.create'],
 
         ];
         $userData = User::all()->except(Auth::id());
@@ -26,7 +27,7 @@ class HomeController extends Controller
     public function deleteUser($id)
     {
         User::find($id)->delete();
-        return back();
+        return back()->with('success', 'User successfully deleted.');
     }
     public function search(Request $request)
     {

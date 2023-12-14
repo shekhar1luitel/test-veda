@@ -67,6 +67,19 @@
             border: 2px solid #54f057;
         }
 
+        .error-message , .alert-danger {
+            padding: 10px 10px 10px 20px;
+            background: #de1818;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .error-message p {
+            margin: 0;
+            font-size: 15px;
+            color: #fff;
+        }
+
         .title {
             display: flex;
             align-items: center;
@@ -220,6 +233,19 @@
         .login-form div {
             margin-bottom: 15px;
         }
+
+        .alert, .alert-success {
+                padding: 10px 10px 10px 20px;
+                background: #0adc3f;
+                margin-bottom: 20px;
+                border-radius: 4px;
+            }
+
+            .success-message p {
+                margin: 0;
+                font-size: 15px;
+                color: #fff;
+            }
 
         label {
             display: block;

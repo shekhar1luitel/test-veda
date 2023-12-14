@@ -17,6 +17,20 @@
     </div>
 
     <div class="container content-wrapper">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="content">
             <h1>{{ $data->name }}</h1>
             <h3>Author: {{ $data->user->username }}</h3>
