@@ -39,6 +39,21 @@
                         src="{{ isset($data->image) ? url('storage/images/' . $data->image) : 'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg' }}"
                         alt="img">
                 </div>
+                <div class="title"></div>
+                <div class="conatiner" style="display:flex;padding:20px; justify-items:end; flex-wrap: wrap;">
+                    @foreach ($blogImage as $data)
+                        <div class="cards" style="display: block">
+                            <div style="padding: 10px" class="card">
+                                <div class="box">
+                                    <h3 class="title">Blog's Image {{$loop->iteration}}</h3>
+                                    <img style="object-fit:fill"
+                                        src="{{ isset($data->image_path) ? url('storage/blog_images/' . $data->image_path) : 'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg' }}"
+                                        alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
         <hr>

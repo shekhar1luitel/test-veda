@@ -9,25 +9,28 @@ class BlogSeeder extends Seeder
 {
     public function run()
     {
-        Blogs::truncate();
 
         Blogs::create([
             'user_id' => '1',
             'name' => 'Introduction to Laravel',
+            'category_id' => null,
             'detail' => 'Laravel is a PHP framework...',
         ]);
         Blogs::create([
             'user_id' => '1',
             'name' => 'Introduction to Laravel',
+            'category_id' => '1',
             'detail' => 'Laravel is a PHP framework...',
         ]);Blogs::create([
             'user_id' => '1',
             'name' => 'Introduction to Laravel',
+            'category_id' => '1',
             'detail' => 'Laravel is a PHP framework...',
 
         ]);Blogs::create([
             'user_id' => '1',
             'name' => 'Introduction to Laravel',
+            'category_id' => '1',
             'detail' => 'Laravel is a PHP framework...',
         ]);
 

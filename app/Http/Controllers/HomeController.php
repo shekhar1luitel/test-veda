@@ -18,7 +18,6 @@ class HomeController extends Controller
 
         ];
         $userData = User::all()->except(Auth::id());
-        // dd($userData);
         $title = 'Veda';
         $userDataPagination = User::paginate(2);
         // $userDataPagination = User::where('id', '!=', Auth::id())->paginate(2);

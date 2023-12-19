@@ -38,17 +38,28 @@
             <form action="{{ route('blog.post') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input name="user_id" value="{{ Auth::id() }}" type="hidden">
+                <label for="categories">Categories</label>
+                <select name="categories" type="name" required>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                        @if ($category->children)
+                            @include('layouts.partials.categories', [
+                                'categories' => $category->children,
+                                'level' => 1,
+                            ])
+                        @endif
+                    @endforeach
+                </select>
                 <label for="name">Title</label>
                 <input name="name" type="name" required>
                 <label for="name">Description</label>
                 <input name="detail" type="description" required>
+                <label for="headImage">Blog Thumbnail</label>
                 <input type="file" name="image">
+                <label for="image">Blog Image</label>
+                <input type="file" name="blogImage[]" multiple>
                 <button class="btn btn-green" type="submit">Submit</button>
             </form>
         </div>
     </div>
-
-
-
-
 @endsection

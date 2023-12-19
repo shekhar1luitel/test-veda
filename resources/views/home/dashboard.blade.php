@@ -23,19 +23,19 @@
             <button class="btn btn-green" type="submit">Search</button>
         </form>
         @if ($errors->any())
-                <div class="error-message alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <p>{{ $error }}</p>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <div class="error-message alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="container mt-5">
             <table class="table table-bordered mb-5">
                 <thead>
@@ -68,13 +68,7 @@
             <div class="d-flex justify-content-center">
                 {!! $userDataPagination->links('vendor.pagination') !!}
             </div>
-        </div>
-        <div class="d-flex justify-content-center">
-            {!! $userDataPagination->links('vendor.pagination') !!}
-        </div>
-
-        <div class="content-2">
-            <table class="content-2 title">
+            <table class="table table-bordered mb-5">
                 <thead>
                     <tr class="table-success">
                         <th scope="col">#</th>
@@ -84,16 +78,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($userData as $data)
+                    @foreach ($userData as $datas)
                         <tr>
-                            <th scope="row">{{ $data->id }}</th>
-                            <td>{{ $data->username }}</td>
-                            <td>{{ $data->email }}</td>
-                            <td>{{ $data->created_at }}</td>
+                            <th scope="row">{{ $datas->id }}</th>
+                            <td>{{ $datas->username }}</td>
+                            <td>{{ $datas->email }}</td>
+                            <td>{{ $datas->created_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
+
     </div>
 @endsection

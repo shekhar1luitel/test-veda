@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <meta charset="utf-8">
     <title>{{ $title }}</title>
     <style>
@@ -67,7 +68,8 @@
             border: 2px solid #54f057;
         }
 
-        .error-message , .alert-danger {
+        .error-message,
+        .alert-danger {
             padding: 10px 10px 10px 20px;
             background: #de1818;
             margin-bottom: 20px;
@@ -147,7 +149,6 @@
             position: absolute;
             right: 0;
             width: 80vw;
-            height: 100vh;
             background: #f1f1f1;
         }
 
@@ -190,8 +191,6 @@
         .container .content .cards {
             padding: 20px 15px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
             flex-wrap: wrap;
         }
 
@@ -214,7 +213,7 @@
             text-align: center;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
@@ -233,18 +232,19 @@
             margin-bottom: 15px;
         }
 
-        .alert, .alert-success {
-                padding: 10px 10px 10px 20px;
-                background: #0adc3f;
-                margin-bottom: 20px;
-                border-radius: 4px;
-            }
+        .alert,
+        .alert-success {
+            padding: 10px 10px 10px 20px;
+            background: #0adc3f;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
 
-            .success-message p {
-                margin: 0;
-                font-size: 15px;
-                color: #fff;
-            }
+        .success-message p {
+            margin: 0;
+            font-size: 15px;
+            color: #fff;
+        }
 
         label {
             display: block;
@@ -388,6 +388,8 @@
     <main style="padding-left: 5px" class="container">
         @yield('content')
     </main>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+
 </body>
 
 </html>

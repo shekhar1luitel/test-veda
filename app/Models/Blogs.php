@@ -13,10 +13,19 @@ class Blogs extends Model
         'name',
         'detail',
         'image',
+        'category_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Categories::class);
+    }
+    public function blogImages()
+    {
+        return $this->hasMany(BlogImage::class);
     }
 }

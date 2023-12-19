@@ -49,6 +49,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Details</th>
                         <th scope="col">Author</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Created At</th>
                         <th scope="col">Updated At</th>
                         <th scope="col">Action</th>
@@ -61,6 +62,7 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ Str::words($data->detail, 20, '...') }}</td>
                             <td>{{ $data->user->username }}</td>
+                            <td>{{ $data->category->category_name }}</td>
                             <td>{{ $data->created_at }}</td>
                             <td>{{ $data->updated_at }}</td>
                             <td class="btn btn-danger" style="color: black"><a
