@@ -1,65 +1,75 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="container">
-        <div class="header">
-            <div class="nav">
-                <div class= "nav"> <button class="btn-green">
-                        <a href="{{ url('/blog') }}">
-                            <li>Blog</li>
-                        </a>
-                    </button> </div>
-                <a href="{{ route('logout.perform') }}">
-                    <button type="submit" class="btn-red">
-                        <li>Logout</li>
-                    </button>
-                </a>
-            </div>
-            </form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="content">
-        <h1>Create Blog</h1>
-        @if ($errors->any())
-            <div class="error-message alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                </ul>
+        <div class="container-fluid">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Blog Create</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
-        @endif
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ route('blog.post') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input name="user_id" value="{{ Auth::id() }}" type="hidden">
+                        <div class="form-group">
+                            <label for="categories">Categories</label>
+                            <select class="form-control" name="categories" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">
+                                        {!! str_repeat('&nbsp;', 4 * $loop->depth) !!}{{ $category->category_name }}
+                                    </option>
+                                    @if ($category->children)
+                                        @include('layouts.partials.categories', ['categories' => $category->children])
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Title</label>
+                            <input class="form-control" name="name" type="text" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="detail">Description</label>
+                            <input class="form-control" name="detail" type="text" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="headImage">Blog Thumbnail</label>
+                            <input class="form-control" type="file" name="image">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Blog Image</label>
+                            <input class="form-control" type="file" name="blogImage[]" multiple>
+                        </div>
+
+                        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
-        @endif
-        <div style="padding-left: 5px" class="container mt-5">
-            <form action="{{ route('blog.post') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <input name="user_id" value="{{ Auth::id() }}" type="hidden">
-                <label for="categories">Categories</label>
-                <select name="categories" type="name" required>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                        @if ($category->children)
-                            @include('layouts.partials.categories', [
-                                'categories' => $category->children,
-                                'level' => 1,
-                            ])
-                        @endif
-                    @endforeach
-                </select>
-                <label for="name">Title</label>
-                <input name="name" type="name" required>
-                <label for="name">Description</label>
-                <input name="detail" type="description" required>
-                <label for="headImage">Blog Thumbnail</label>
-                <input type="file" name="image">
-                <label for="image">Blog Image</label>
-                <input type="file" name="blogImage[]" multiple>
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
         </div>
     </div>
 @endsection

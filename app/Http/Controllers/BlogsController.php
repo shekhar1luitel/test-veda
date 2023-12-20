@@ -17,45 +17,44 @@ class BlogsController extends Controller
 {
     public function index()
     {
-        $sidebar = [
-            ['Dashboard' => 'dashboard'],
-        ];
-        
+        $searchUrl = 'blog.search';
+
         $BlogData = Blogs::all();
         $title = 'Veda-Blog';
-        return view('blog/index', compact('BlogData', 'title', 'sidebar'));
+        return view('blog/index', compact('BlogData', 'title'));
     }
     public function create()
     {
-        $sidebar = [
-            ['Dashboard' => 'dashboard'],
-        ];
         $BlogData = Blogs::all();
         // $categories = Categories::all();
         $categories = Categories::with('children')->whereNull('parent_id')->get();
         $title = 'Veda-Blog';
-        return view('blog/create', compact('categories', 'BlogData', 'title', 'sidebar'));
+        return view('blog/create', compact('categories', 'BlogData', 'title'));
     }
     public function blogShow()
     {
-        $sidebar = [
-            ['Dashboard' => 'dashboard'],
-        ];
-        $BlogData = Blogs::all()->where('user_id', Auth::id());
+        $BlogData = Blogs::all();
+        $allBlogImages = collect();
+
+        foreach ($BlogData as $data) {
+            $id = $data->id;
+            $blogImages = BlogImage::where('blog_id', $id)->get();
+            $allBlogImages = $allBlogImages->merge($blogImages);
+        }
+
         $title = 'Veda-Blog';
-        return view('blog/blog', compact('BlogData', 'title', 'sidebar'));
+
+        return view('blog/blog', compact('BlogData', 'allBlogImages', 'title'));
     }
+
 
     public function blogShowOne($id)
     {
-        $sidebar = [
-            ['Dashboard' => 'dashboard'],
-        ];
         $data = Blogs::with('user')->find($id);
         $BlogData = Blogs::all();
         $title = 'Veda-Blog';
         $blogImage = BlogImage::where('blog_id', $id)->get();
-        return view('blog.viewBlog', compact('data', 'BlogData', 'title', 'sidebar', 'blogImage'));
+        return view('blog.viewBlog', compact('data', 'BlogData', 'title', 'blogImage'));
     }
     public function blogCreate(Request $request)
     {
@@ -134,16 +133,12 @@ class BlogsController extends Controller
     }
     public function updateShow($updateData)
     {
-
-        $sidebar = [
-            ['Dashboard' => 'dashboard'],
-        ];
         $blogImage = BlogImage::where('blog_id', $updateData)->get();
 
         $BlogData = Blogs::find($updateData);
         $Category = Categories::all();
         $title = 'Veda-Blog';
-        return view('blog/update', compact('updateData', 'Category', 'BlogData', 'blogImage', 'title', 'sidebar'));
+        return view('blog/update', compact('updateData', 'Category', 'BlogData', 'blogImage', 'title'));
     }
 
     public function updateBlog(Request $request, $id)
@@ -238,11 +233,6 @@ class BlogsController extends Controller
 
     public function search(Request $request)
     {
-        $sidebar = [
-            ['Dashboard' => 'dashboard'],
-            ['Blog' => 'blog'],
-            ['Blog Show' => 'blog.show'],
-        ];
         $title = 'Veda';
 
         $search = $request->input('search');
@@ -252,6 +242,6 @@ class BlogsController extends Controller
             ->orWhere('user_id', 'like', '%' . $search . '%')
             ->get();
 
-        return view('blog/search_results', compact('search', 'searchdata', 'title', 'sidebar'));
+        return view('blog/search_results', compact('search', 'searchdata', 'title'));
     }
 }

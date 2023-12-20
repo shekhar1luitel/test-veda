@@ -1,18 +1,6 @@
 @extends('layouts.app-master')
 
 @section('content')
-    {{-- <div class="container">
-        <div class="header">
-            <div class="nav">
-                <a href="{{ route('logout.perform') }}">
-                    <button type="submit" class="btn-red">
-                        <li>Logout</li>
-                    </button>
-                </a>
-            </div>
-            </form>
-        </div>
-    </div> --}}
     @if ($errors->any())
         <div class="error-message alert-danger">
             <ul>
@@ -38,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered ">
+            <table class="table table-bordered">
                 <thead>
                     <tr class="table-success">
                         <th scope="col">#</th>
@@ -56,11 +44,7 @@
                             <td>{{ $data->username }}</td>
                             <td>{{ $data->email }}</td>
                             <td>{{ $data->created_at }}</td>
-                            {{-- @if (Auth::id() === $data->id)
-                                    <td class="btn btn-danger" style="color: black"><a
-                                            href="{{ route('delete', [$data->id]) }}">Delete</a></td>
-                                @endif --}}
-                            <td class="">
+                            <td>
                                 <a href="{{ route('delete', [$data->id]) }}">
                                     <button class="btn btn-xs btn-danger">Delete</button>
                                 </a>

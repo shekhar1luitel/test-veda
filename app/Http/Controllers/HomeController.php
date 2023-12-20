@@ -39,6 +39,6 @@ class HomeController extends Controller
             ->orWhere('id', 'like', '%' . $search . '%')
             ->orWhere('email', 'like', '%' . $search . '%')
             ->get();
-        return view('home/search_results', compact('searchdata','search', 'searchdata', 'title', 'sidebar'));
+        return view('home/search_results', compact('searchdata','search', 'searchdata', 'title'));
     }
 }
