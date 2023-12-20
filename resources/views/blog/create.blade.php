@@ -58,7 +58,7 @@
                 <input type="file" name="image">
                 <label for="image">Blog Image</label>
                 <input type="file" name="blogImage[]" multiple>
-                <button class="btn btn-green" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
     </div>

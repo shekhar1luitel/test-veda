@@ -1,7 +1,7 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="container">
+    {{-- <div class="container">
         <div class="header">
             <div class="nav">
                 <a href="{{ route('logout.perform') }}">
@@ -12,32 +12,33 @@
             </div>
             </form>
         </div>
-    </div>
+    </div> --}}
+    @if ($errors->any())
+        <div class="error-message alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="content">
-        <h1 style="padding:15px">All Users with Pagination</h1>
-        <form action="{{ route('user.search') }}" method="GET">
-            @csrf
-            <div style="padding-bottom: 10px">
-                <input type="text" name="search" placeholder="Search">
+        <div class="container-fluid">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">User - Pagination</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-green" type="submit">Search</button>
-        </form>
-        @if ($errors->any())
-            <div class="error-message alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        <div class="container mt-5">
-            <table class="table table-bordered mb-5">
+            <table class="table table-bordered ">
                 <thead>
                     <tr class="table-success">
                         <th scope="col">#</th>
@@ -59,14 +60,26 @@
                                     <td class="btn btn-danger" style="color: black"><a
                                             href="{{ route('delete', [$data->id]) }}">Delete</a></td>
                                 @endif --}}
-                            <td class="btn btn-danger" style="color: black"><a
-                                    href="{{ route('delete', [$data->id]) }}">Delete</a></td>
+                            <td class="">
+                                <a href="{{ route('delete', [$data->id]) }}">
+                                    <button class="btn btn-xs btn-danger">Delete</button>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             <div class="d-flex justify-content-center">
                 {!! $userDataPagination->links('vendor.pagination') !!}
+            </div>
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">User</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
             <table class="table table-bordered mb-5">
                 <thead>
@@ -89,7 +102,5 @@
                 </tbody>
             </table>
         </div>
-
-
     </div>
 @endsection

@@ -24,7 +24,7 @@
                         <h1 style="font-size: 1.4rem;">{{ $data->username }}</h1>
                         <h3 style="padding-bottom: 32px;">{{ $data->email }}</h3>
                         <div style="padding-bottom: 5px;">
-                            <button class="btn btn-red"><a
+                            <button class="btn btn-danger"><a
                                     href="{{ route('delete', [$data->id]) }}">Delete</a></button>
                         </div>
                     </div>

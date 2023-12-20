@@ -1,14 +1,59 @@
-<div class="side-menu">
-    <div>
-        <h1 class="brand-name">VEDA</h1>
+<?php
+$sidebar = [
+    'Dashboard' => ['icon' => 'fas fa-tachometer-alt', 'url' => 'dashboard'],
+    'Blog' => [
+        'icon' => 'far fa-newspaper',
+        'items' => [
+            'Blog' => ['icon' => 'fa-solid fa-blog', 'url' => 'blog'],
+            'Blog Show' => ['icon' => 'far fa-file', 'url' => 'blog.show'],
+            'Blog Create' => ['icon' => 'far fa-edit', 'url' => 'blog.show'],
+        ],
+    ],
+];
+?>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="/" class="brand-link">
+        {{-- <img src="https://veda-app.s3.ap-south-1.amazonaws.com/assets/2/about/2023-04-17/pjpXLl9Lek1EOY77-1681731117.png" alt=""> --}}
+        <img src="https://veda-app.s3.ap-south-1.amazonaws.com/assets/2/about/2023-04-17/pjpXLl9Lek1EOY77-1681731117.png"
+            alt="Veda Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">VEDA</span>
+    </a>
+    <a href="#" class="brand-link">
+        <span class="brand-text font-weight-light">VEDA</span>
+    </a>
+
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                @foreach ($sidebar as $label => $data)
+                    <li class="nav-item">
+                        <a href="{{ isset($data['url']) ? route($data['url']) : '#' }}" class="nav-link">
+                            <i class="nav-icon {{ $data['icon'] }}"></i>
+                            <p>{{ $label }}
+                                @if (isset($data['items']) && is_array($data['items']) && count($data['items']) > 0)
+                                    <i class="right fas fa-angle-left"></i>
+                                @endif
+                            </p>
+                        </a>
+
+                        @if (isset($data['items']))
+                            <ul class="nav nav-treeview">
+                                @foreach ($data['items'] as $subLabel => $subData)
+                                    <li class="nav-item">
+                                        <a href="{{ isset($subData['url']) ? route($subData['url']) : '#' }}"
+                                            class="nav-link">
+                                            <i class="nav-icon {{ $subData['icon'] }}"></i>
+                                            <p>{{ $subLabel }}</p>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </nav>
     </div>
-    <ul>
-        @foreach ($sidebar as $value => $key)
-            @foreach ($key as $value => $url)
-                <a href="{{route($url)}}">
-                    <span class="title span"><?= $value ?></span>
-                </a>
-            @endforeach
-        @endforeach
-    </ul>
-</div>
+</aside>
+

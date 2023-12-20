@@ -42,9 +42,9 @@
                                     {{ $data->user->username }}</h2>
                                 <h3 style="padding-bottom: 32px;">{{ Str::words($data->detail, 20, '...') }}</h3>
                                 <div style="padding-bottom: 5px;">
-                                    <button class="btn btn-green"><a
+                                    <button class="btn btn-sm btn-primary"><a
                                             href="{{ route('blog.show.one', [$data->id]) }}">View</a></button>
-                                    <button class="btn btn-red"><a
+                                    <button class="btn btn-sm btn-danger"><a
                                             href="{{ route('deleteBlog', [$data->id]) }}">Delete</a></button>
                                 </div>
                             </div>

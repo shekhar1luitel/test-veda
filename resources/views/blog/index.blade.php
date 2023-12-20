@@ -39,7 +39,7 @@
             <div style="padding-bottom: 10px">
                 <input type="text" name="search" placeholder="Search">
             </div>
-            <button class="btn btn-green" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">Search</button>
         </form>
         <div class="container mt-5">
             <table class="table table-bordered mb-5">

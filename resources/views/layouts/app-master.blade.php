@@ -1,395 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title }}</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
 
-        body {
-            min-height: 100vh;
-        }
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- AdminLTE CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3/dist/css/adminlte.min.css">
 
-        a {
-            text-decoration: none;
-        }
-
-        li {
-            list-style: none;
-        }
-
-        h1,
-        h2 {
-            color: #444;
-        }
-
-        div>.brand-name>h1 {
-            color: aquamarine;
-            font-size: 30px;
-            padding: 2px;
-        }
-
-        h3 {
-            color: #999;
-        }
-
-        .btn-red {
-            background: #f05462;
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-        }
-
-        .btn-red:hover {
-            color: #f05462;
-            background: white;
-            padding: 3px 8px;
-            border: 2px solid #f05462;
-        }
-
-        .btn-green {
-            background: #54f057;
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-        }
-
-        .btn-green:hover {
-            color: #54f057;
-            background: white;
-            padding: 3px 8px;
-            border: 2px solid #54f057;
-        }
-
-        .error-message,
-        .alert-danger {
-            padding: 10px 10px 10px 20px;
-            background: #de1818;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .error-message p {
-            margin: 0;
-            font-size: 15px;
-            color: #fff;
-        }
-
-        .title {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 15px 10px;
-            border-bottom: 2px solid #999;
-        }
-
-        .login-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
-            text-align: center;
-        }
-
-        table {
-            padding: 10px;
-        }
-
-        th,
-        td {
-            text-align: left;
-            padding: 8px;
-        }
-
-        .side-menu {
-            position: fixed;
-            background: black;
-            width: 20vw;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .side-menu .brand-name {
-            height: 10vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-        }
-
-        .side-menu .brand-name:hover {
-            color: purple;
-        }
-
-        .side-menu li,
-        span {
-            font-size: 24px;
-            padding: 10px 40px;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-
-        .side-menu li:hover,
-        span:hover {
-            background: white;
-            color: black;
-        }
-
-        .container {
-            position: absolute;
-            right: 0;
-            width: 80vw;
-            background: #f1f1f1;
-        }
-
-        .container .header {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 80vw;
-            height: 10vh;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .container .header .nav {
-            width: 90%;
-            display: flex;
-            align-items: center;
-        }
-
-
-        .container .header .nav .user {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-right: 2%;
-        }
-
-        .container .content {
-            position: relative;
-            margin-top: 10vh;
-            min-height: 90vh;
-            background: #f1f1f1;
-        }
-
-        .container .content .cards {
-            padding: 20px 15px;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .container .content .cards .card {
-            width: 250px;
-            background: white;
-            margin: 20px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        .login-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
-            text-align: center;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .error-info {
-            color: #d9534f;
-            font-size: 12px;
-            margin-top: 5px;
-            display: block;
-        }
-
-        .login-form div {
-            margin-bottom: 15px;
-        }
-
-        .alert,
-        .alert-success {
-            padding: 10px 10px 10px 20px;
-            background: #0adc3f;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .success-message p {
-            margin: 0;
-            font-size: 15px;
-            color: #fff;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        @media screen and (max-width: 1050px) {
-            .side-menu li {
-                font-size: 18px;
-            }
-        }
-
-        @media screen and (max-width: 940px) {
-            .side-menu li span {
-                font-size: 16px;
-            }
-
-            .side-menu {
-                align-items: center;
-            }
-
-            .side-menu li:hover {
-                background: #fff;
-                padding: 8px 38px;
-                border: 2px solid white;
-            }
-
-            .brand-name {
-                font-size: 19px;
-            }
-
-            span {
-                font-size: 18px;
-            }
-
-        }
-
-        @media screen and (max-width:536px) {
-            .brand-name {
-                font-size: 15px;
-            }
-
-            .container .content .cards {
-                justify-content: center;
-            }
-
-            span {
-                font-size: 15px;
-            }
-
-        }
-
-
-        .container .content .content-2 {
-            min-height: 60vh;
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .container .content .content-2 .recent-payments {
-            min-height: 50vh;
-            flex: 5;
-            background: white;
-            margin: 0 25px 25px 25px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container .content .content-2 .new-students {
-            flex: 2;
-            background: white;
-            min-height: 50vh;
-            margin: 0 25px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container .content .content-2 .new-students table td:nth-child(1) img {
-            height: 40px;
-            width: 40px;
-        }
-
-        @media screen and (max-width: 1050px) {
-            .side-menu li {
-                font-size: 18px;
-            }
-        }
-
-        @media screen and (max-width: 940px) {
-            .side-menu li span {
-                display: none;
-            }
-
-            .side-menu {
-                align-items: center;
-            }
-
-            .side-menu li img {
-                width: 40px;
-                height: 40px;
-            }
-
-            .side-menu li:hover {
-                background: #f05462;
-                padding: 8px 38px;
-                border: 2px solid white;
-            }
-        }
-
-        @media screen and (max-width:536px) {
-            .brand-name h1 {
-                font-size: 16px;
-            }
-
-            .container .content .cards {
-                justify-content: center;
-            }
-
-            .side-menu li img {
-                width: 30px;
-                height: 30px;
-            }
-
-            .container .content .content-2 .recent-payments table th:nth-child(2),
-            .container .content .content-2 .recent-payments table td:nth-child(2) {
-                display: none;
-            }
-        }
-    </style>
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Preloader -->
+        {{-- <div class="preloader">
+            <img src="https://veda-app.s3.ap-south-1.amazonaws.com/assets/2/about/2023-04-17/pjpXLl9Lek1EOY77-1681731117.png"
+                alt="Vedalogo" >
+        </div> --}}
 
-    @include('layouts.partials.navbar')
+        <!-- Navbar -->
+        @include('layouts.partials.top-navbar')
+        <!-- /.navbar -->
 
-    <main style="padding-left: 5px" class="container">
-        @yield('content')
-    </main>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+        <!-- Main Sidebar Container -->
+        @include('layouts.partials.navbar')
 
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                @yield('content')
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <aside class="control-sidebar control-sidebar-dark">
+
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- Footer content goes here -->
+            <div class="float-right d-none d-sm-inline">
+                At the End
+            </div>
+
+            <strong>Copyright &copy;  <a href="https://veda-app.com">VEDA</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+
+
+    <script src="https://kit.fontawesome.com/a08c0691c4.js" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+
+    <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://adminlte.io/themes/v3/dist/js/adminlte.min.js?v=3.2.0"></script>
 </body>
 
 </html>

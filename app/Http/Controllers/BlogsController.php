@@ -20,6 +20,7 @@ class BlogsController extends Controller
         $sidebar = [
             ['Dashboard' => 'dashboard'],
         ];
+        
         $BlogData = Blogs::all();
         $title = 'Veda-Blog';
         return view('blog/index', compact('BlogData', 'title', 'sidebar'));
