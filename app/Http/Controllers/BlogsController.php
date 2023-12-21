@@ -54,6 +54,7 @@ class BlogsController extends Controller
         $BlogData = Blogs::all();
         $title = 'Veda-Blog';
         $blogImage = BlogImage::where('blog_id', $id)->get();
+        // dd($data->user->name);
         return view('blog.viewBlog', compact('data', 'BlogData', 'title', 'blogImage'));
     }
     public function blogCreate(Request $request)
